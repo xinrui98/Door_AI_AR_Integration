@@ -5,9 +5,7 @@ An [ARCore](https://developers.google.com/ar) sample demonstrating how to use
 camera images as an input for machine learning algorithms, and how to use the
 results of the inference model to create anchors in the AR scene.
 
-<p align="center">
-  
-</p>
+https://user-images.githubusercontent.com/44086084/126466103-710e6656-1cd1-43f7-a3ac-1cd083154ef4.mp4
 
 This sample uses [ML Kit's Object Detection](https://developers.google.com/ml-kit/vision/object-detection)
 and (optionally) [Google's Cloud Vision API](https://cloud.google.com/vision/docs/object-localizer)
@@ -48,27 +46,27 @@ Implemented
 
 In [AppRenderer.kt](app/src/main/java/com/google/ar/core/examples/java/ml/AppRenderer.kt) the line
 ```kotlin
-val objRenderer = ObjRender("obj/door.obj", "obj/door_texture.png", 0.001f)
+val objRenderer = ObjRender("obj/door.obj", "obj/door_texture.png", 0.005f)
 ```
-loads the model door.obj with the texture door_texture.png from the folder asset/obj with a size of 0.001f.
+loads the model door.obj with the texture door_texture.png from the folder asset/obj with a size of 0.005f.
 And the line
 ```kotlin
 objRenderer.draw(render, modelViewProjectionMatrix)
 ```
 draws the textured model at the label place.
 
-The size 0.001f depends on mesh itself, so you need to adjust it for each 3d model.
+The size 0.005f depends on mesh itself, so it needs to be adjusted for each 3d model.
 
 ### Shaders for obj rendering
 
 The class [ObjRender](app/src/main/java/com/google/ar/core/examples/java/ml/render/ObjRender.kt) uses two new shaders [asset/shaders/obj.vert](app/src/main/assets/shaders/obj.vert) and [asset/shaders/obj.frag](app/src/main/assets/shaders/obj.frag).
 This shaders are specific for obj model rendering.
-Anyway you don't need to code or define other shaders for a basic rendering with no lighting or shadows.
+You do not need to code or define other shaders for a basic rendering with no lighting or shadows.
 
 ### Model matrix for affine transformation
 The rendering method `onDrawFrame()` in class `AppRenderer`
 defines a modelMatrix for affine transformations of translation and scaling.
-If you want to add other transformations such as rotation you need to add it in this block
+If you wish to add other transformations such as rotation you need to add it in this block
 ```kotlin
 Matrix.setIdentityM(modelMatrix, 0)
 Matrix.translateM(modelMatrix, 0, anchor.pose.tx(), anchor.pose.ty(), anchor.pose.tz())
